@@ -1,17 +1,20 @@
 # VBA Project: cJobject
-This repo (cJobject) was automatically created on 26/03/2015 09:33:15 by VBAGit.For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation") or [contact me on G+](https://plus.google.com/+BruceMcpherson "Bruce McPherson - GDE")  
+This repo (cJobject) was automatically created on 10/04/2015 13:58:00 by VBAGit.For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation") or [contact me on G+](https://plus.google.com/+BruceMcpherson "Bruce McPherson - GDE")  
 ## Details for VBA project cJobject
 Where possibile directly referenced or sub referenced library sources have been copied to this repository  
 ### Modules of cJobject included in this repo
 *name*|*type*|*source*|*docs*  
 ---|---|---|---  
 cJobject|ClassModule|[cJobject.cls](scripts/cJobject.cls "script source")|[cJobject_cls.md](scripts/cJobject_cls.md "script docs")  
+usefulcJobject|StdModule|[usefulcJobject.vba](scripts/usefulcJobject.vba "script source")|[usefulcJobject_vba.md](scripts/usefulcJobject_vba.md "script docs")  
   
 ### All dependencies and sub dependencies in this repo  
 *name*|*type*|*source*|*docs*  
 ---|---|---|---  
 cStringChunker|ClassModule|[cStringChunker.cls](libraries/cStringChunker.cls "library source")|[cStringChunker_cls.md](libraries/cStringChunker_cls.md "library docs")  
 usefulStuff|StdModule|[usefulStuff.vba](libraries/usefulStuff.vba "library source")|[usefulStuff_vba.md](libraries/usefulStuff_vba.md "library docs")  
+regXLib|StdModule|[regXLib.vba](libraries/regXLib.vba "library source")|[regXLib_vba.md](libraries/regXLib_vba.md "library docs")  
+cregXLib|ClassModule|[cregXLib.cls](libraries/cregXLib.cls "library source")|[cregXLib_cls.md](libraries/cregXLib_cls.md "library docs")  
   
 ###Excel references  
 ####These references were detected in the workbook (VbaGitBootStrap.xlsm) this repo was created from. You may not need them all  
