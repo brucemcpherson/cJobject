@@ -1,7 +1,7 @@
 'gistThat@mcpher.com :do not modify this line - see ramblings.mcpher.com for details: updated on 8/18/2014 4:47:45 PM : from manifest:3414394 gist https://gist.github.com/brucemcpherson/3414365/raw
 ' this is used for object serliazation. Its just basic JSON with only string data types catered for
 Option Explicit
-' v2.22 3414365
+' v2.23 3414365
 'for more about this
 ' http://ramblings.mcpher.com/Home/excelquirks/classeslink/data-manipulation-classes
 'to contact me
@@ -539,9 +539,10 @@ Public Function recurseSerialize(job As cJobject, Optional soFar As cStringChunk
     ElseIf (VarType(job.value) <> vbLong And _
         VarType(job.value) <> vbBoolean And _
         VarType(job.value) <> vbInteger And _
-        VarType(job.value) <> vbDouble And Not job.isVoid()) _
-        Then
-        t.add quote(CStr(escapeify(job.value)))
+        VarType(job.value) <> vbDouble And _
+        VarType(job.value) <> vbSingle And _
+        VarType(job.value) <> vbCurrency And Not job.isVoid()) Then
+            t.add quote(CStr(escapeify(job.value)))
     Else
         If Not job.isVoid() Then
             t.add LCase(job.toString)
@@ -619,6 +620,33 @@ Public Function mergeArrayOfJobs() As cJobject
     Next job
     
     Set mergeArrayOfJobs = head
+End Function
+Public Function extractAndBlowArrayOfJobs() As cJobject
+    Dim job As cJobject, newArray As cJobject, jo As cJobject, head As cJobject, joc As cJobject
+    
+    ' Me should be an array of Jobjects, which are themsleves objects
+    ' will blow out the objects ffor stringifiyinh
+    Debug.Assert isArrayRoot
+    
+    Set newArray = New cJobject
+    With newArray.init(Nothing).addArray
+        '// select out any objects and add them
+        For Each job In children
+            Set head = .add
+            For Each jo In job.children
+                If (jo.isObjValue) Then
+                    For Each joc In jo.getObject.children
+                        Set joc.parent = head
+                        joc.childIndex = head.children.Count
+                        head.children.add joc, joc.key
+                    Next joc
+                End If
+            Next jo
+        Next job
+    End With
+
+    
+    Set extractAndBlowArrayOfJobs = newArray
 End Function
 Public Function replaceBranch(byThis As cJobject) As cJobject
     
@@ -1250,18 +1278,28 @@ End Function
 Public Function needSwap(cc As cJobject, e As eSort) As Boolean
     ' this can be used from a sorting alogirthm
     
+    Dim a As Variant, b As Variant
+
     Select Case e
         Case eSortAscending
-            needSwap = LCase(cValue(pbyKey)) > LCase(cc.cValue(pbyKey))
+            needSwap = sortNorm(cValue(pbyKey)) > sortNorm(cc.cValue(pbyKey))
             
         Case eSortDescending
-            needSwap = LCase(cValue(pbyKey)) < LCase(cc.cValue(pbyKey))
+            needSwap = sortNorm(cValue(pbyKey)) < sortNorm(cc.cValue(pbyKey))
     
         Case Else
             needSwap = False
     End Select
 End Function
+Private Function sortNorm(v As Variant) As Variant
 
+    If (VarType(v) = vbString) Then
+        sortNorm = LCase(v)
+    Else
+        sortNorm = v
+    End If
+    
+End Function
 Private Sub Class_Initialize()
     pisArrayRoot = False
     pValid = True
@@ -1279,6 +1317,7 @@ Public Sub tearDown()
     Set pBacktrack = Nothing
     Set pChildren = Nothing
 End Sub
+
 
 
 
