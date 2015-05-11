@@ -19,7 +19,7 @@ Private Declare PtrSafe Function ShellExecute _
   Lib "shell32.dll" Alias "ShellExecuteA" ( _
   ByVal hwnd As Long, _
   ByVal Operation As String, _
-  ByVal Filename As String, _
+  ByVal fileName As String, _
   Optional ByVal Parameters As String, _
   Optional ByVal Directory As String, _
   Optional ByVal WindowStyle As Long = vbMaximizedFocus _
@@ -897,3 +897,4 @@ Public Function concatFolderName(folderName As String, fileName As String) As St
     concatFolderName = c.add(folderName).chopIf("/").chopIf("\").add("/").add(fileName).toString
     
 End Function
+
