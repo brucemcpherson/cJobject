@@ -1,7 +1,7 @@
 'gistThat@mcpher.com :do not modify this line - see ramblings.mcpher.com for details: updated on 8/18/2014 4:47:45 PM : from manifest:3414394 gist https://gist.github.com/brucemcpherson/3414365/raw
 ' this is used for object serliazation. Its just basic JSON with only string data types catered for
 Option Explicit
-' v2.23 3414365
+' v2.24 3414365
 'for more about this
 ' http://ramblings.mcpher.com/Home/excelquirks/classeslink/data-manipulation-classes
 'to contact me
