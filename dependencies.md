@@ -1,5 +1,5 @@
 # VBA Project: cJobject
-This repo (cJobject) was automatically created on 5/11/2015 9:56:44 AM by VBAGit.For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation") or [contact me on G+](https://plus.google.com/+BruceMcpherson "Bruce McPherson - GDE")  
+This repo (cJobject) was automatically created on 5/11/2015 12:07:14 PM by VBAGit.For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation") or [contact me on G+](https://plus.google.com/+BruceMcpherson "Bruce McPherson - GDE")  
 ## Details for VBA project cJobject
 Where possibile directly referenced or sub referenced library sources have been copied to this repository  
 ### Modules of cJobject included in this repo
