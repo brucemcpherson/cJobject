@@ -2,7 +2,7 @@
 ## VBA Module: **[cJobject](/scripts/cJobject.cls "source is here")**
 ### Type: ClassModule  
 
-This procedure list for repo (cJobject) was automatically created on 10/04/2015 13:57:59 by VBAGit.
+This procedure list for repo (cJobject) was automatically created on 5/11/2015 9:56:44 AM by VBAGit.
 For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation")
 
 Below is a section for each procedure in cJobject
@@ -828,6 +828,19 @@ Description: ****
 
 
 ---
+VBA Procedure: **extractAndBlowArrayOfJobs**  
+Type: **Function**  
+Returns: **[cJobject](/scripts/cJobject_cls.md "cJobject")**  
+Return description: ****  
+Scope: **Public**  
+Description: ****  
+
+*Public Function extractAndBlowArrayOfJobs() As cJobject*  
+
+**no arguments required for this procedure**
+
+
+---
 VBA Procedure: **replaceBranch**  
 Type: **Function**  
 Returns: **[cJobject](/scripts/cJobject_cls.md "cJobject")**  
@@ -1423,6 +1436,21 @@ Description: ****
 ---|---|---|---|---
 cc|[cJobject](/scripts/cJobject_cls.md "cJobject")|False||
 e|eSort|False||
+
+
+---
+VBA Procedure: **sortNorm**  
+Type: **Function**  
+Returns: **Variant**  
+Return description: ****  
+Scope: **Private**  
+Description: ****  
+
+*Private Function sortNorm(v As Variant) As Variant*  
+
+*name*|*type*|*optional*|*default*|*description*
+---|---|---|---|---
+v|Variant|False||
 
 
 ---
