@@ -2,7 +2,7 @@
 ## VBA Module: **[cStringChunker](/libraries/cStringChunker.cls "source is here")**
 ### Type: ClassModule  
 
-This procedure list for repo (cJobject) was automatically created on 10/04/2015 13:57:59 by VBAGit.
+This procedure list for repo (cJobject) was automatically created on 5/11/2015 9:56:43 AM by VBAGit.
 For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation")
 
 Below is a section for each procedure in cStringChunker
