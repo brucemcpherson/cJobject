@@ -57,7 +57,7 @@ Public Sub init(sName As String, _
 End Sub
 Public Function getString(sFrom As String) As String
     Dim mc As MatchCollection, am As match, rs As String
-    Set mc = pRegex.Execute(sFrom)
+    Set mc = pRegex.execute(sFrom)
     rs = ""
     For Each am In mc
         rs = rs & am.value
@@ -66,14 +66,14 @@ Public Function getString(sFrom As String) As String
 End Function
 Public Function getGroup(sFrom As String, groupNumber As Long) As String
     Dim mc As MatchCollection, am As match, bm As SubMatches, rs As String
-    Set mc = pRegex.Execute(sFrom)
+    Set mc = pRegex.execute(sFrom)
     rs = ""
     
     
-    If mc.Count > 1 And mc.Count >= groupNumber Then
+    If mc.count > 1 And mc.count >= groupNumber Then
         rs = mc.Item(groupNumber - 1).value
-    ElseIf mc.Count = 1 Then
-        If mc.Item(0).SubMatches.Count >= groupNumber Then
+    ElseIf mc.count = 1 Then
+        If mc.Item(0).SubMatches.count >= groupNumber Then
     ' dont really understand this yet
             rs = mc.Item(0).SubMatches(groupNumber - 1)
         End If
@@ -89,6 +89,8 @@ Function getTest(sFrom As String) As Boolean
     getTest = pRegex.Test(sFrom)
 
 End Function
+
+
 
 
 
