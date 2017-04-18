@@ -1,7 +1,7 @@
 'gistThat@mcpher.com :do not modify this line - see ramblings.mcpher.com for details: updated on 8/18/2014 4:47:45 PM : from manifest:3414394 gist https://gist.github.com/brucemcpherson/3414365/raw
 ' this is used for object serliazation. Its just basic JSON with only string data types catered for
 Option Explicit
-' v2.24 3414365
+' v2.25 3414365
 'for more about this
 ' http://ramblings.mcpher.com/Home/excelquirks/classeslink/data-manipulation-classes
 'to contact me
@@ -197,7 +197,7 @@ End Property
 Public Property Get hasChildren() As Boolean
     hasChildren = False
     If Not pChildren Is Nothing Then
-        hasChildren = (pChildren.Count > 0)
+        hasChildren = (pChildren.count > 0)
     End If
 End Property
 Public Function deleteChild(childName As String) As cJobject
@@ -275,7 +275,7 @@ Public Function init(p As cJobject, Optional k As String = cNull, Optional v As 
             MsgBox ("Programming error " & pkey & " is a duplicate object")
             pValid = False
         Else
-            pIndex = pParent.children.Count + 1
+            pIndex = pParent.children.count + 1
             If pFake Then
                 pkey = CStr(pIndex)
             End If
@@ -534,21 +534,48 @@ Public Function recurseSerialize(job As cJobject, Optional soFar As cStringChunk
   
   If Not (job.hasChildren Or job.isArrayRoot) Then
     If blf And Not job.hasKey Then s = s & Space(indent)
+    
+    Dim vt As VbVarType
+    vt = VarType(job.value)
+    
+    ' an embedded object
     If (job.isObjValue()) Then
         t.add quote(job.toString)
-    ElseIf (VarType(job.value) <> vbLong And _
-        VarType(job.value) <> vbBoolean And _
-        VarType(job.value) <> vbInteger And _
-        VarType(job.value) <> vbDouble And _
-        VarType(job.value) <> vbSingle And _
-        VarType(job.value) <> vbCurrency And Not job.isVoid()) Then
-            t.add quote(CStr(escapeify(job.value)))
-    Else
-        If Not job.isVoid() Then
-            t.add LCase(job.toString)
+        
+    ' translate to null
+    ElseIf job.isVoid() Then
+        t.add "null"
+    
+    ' take care to avoid localized version of true/false
+    ElseIf vt = vbBoolean Then
+
+        If (job.value) Then
+            t.add ("true")
         Else
-            t.add "null"
+            t.add ("true")
         End If
+    
+    ' take care to avoid localized version of decimal points
+    ElseIf (vt = vbDouble Or _
+        vt = vbSingle Or _
+        vt = vbCurrency) Then
+        
+        t.add Replace(LCase(job.toString), ",", ".")
+    
+    ' numbers shouldnt be quoted
+    ElseIf (vt = vbLong Or _
+            vt = vbInteger Or _
+            vt = vbByte) Then
+            
+        t.add (job.toString)
+   
+    ' turn dates to ISO
+    ElseIf (vt = vbDate) Then
+        t.add (toISODateTime(job.value))
+        
+    ' quote and escapeify everything else
+    Else
+        t.add quote(CStr(escapeify(job.value)))
     End If
         
   Else
@@ -611,7 +638,7 @@ Public Function mergeArrayOfJobs() As cJobject
         If (job.childIndex > 1) Then
             For Each jo In job.getObject().children
                 Set jo.parent = head
-                jo.childIndex = head.children.Count + 1
+                jo.childIndex = head.children.count + 1
                 head.children.add jo, CStr(jo.childIndex)
             Next jo
         Else
@@ -637,7 +664,7 @@ Public Function extractAndBlowArrayOfJobs() As cJobject
                 If (jo.isObjValue) Then
                     For Each joc In jo.getObject.children
                         Set joc.parent = head
-                        joc.childIndex = head.children.Count
+                        joc.childIndex = head.children.count
                         head.children.add joc, joc.key
                     Next joc
                 End If
@@ -662,7 +689,7 @@ Public Function replaceBranch(byThis As cJobject) As cJobject
     ' add me and set my index
     Dim k As String
     k = byThis.key
-    byThis.childIndex = byThis.parent.children.Count + 1
+    byThis.childIndex = byThis.parent.children.count + 1
     If byThis.fake Then
         k = CStr(byThis.childIndex)
     End If
@@ -1317,6 +1344,7 @@ Public Sub tearDown()
     Set pBacktrack = Nothing
     Set pChildren = Nothing
 End Sub
+
 
 
 
