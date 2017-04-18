@@ -6,7 +6,6 @@ Option Explicit
 ' thanks to Charles Wheeler - http://www.decisionmodels.com/
 ' ---
 
-
 #If VBA7 And Win64 Then
 
 Private Declare PtrSafe Function getTickCount _
@@ -73,7 +72,7 @@ End Function
 
 Sub deleteAllFromCollection(co As Collection)
     Dim o As Object, i As Long
-    For i = co.Count To 1 Step -1
+    For i = co.count To 1 Step -1
         co(i).Delete
     Next i
     
@@ -167,8 +166,8 @@ Function SortColl(ByRef coll As Collection, eorder As Long) As Long
     Dim va As Variant, vb As Variant, bSwap As Boolean
     Dim x As Object, y As Object
     
-    For ita = 1 To coll.Count - 1
-        For itb = ita + 1 To coll.Count
+    For ita = 1 To coll.count - 1
+        For itb = ita + 1 To coll.count
             Set x = coll(ita)
             Set y = coll(itb)
             bSwap = x.needSwap(y, eorder)
@@ -897,4 +896,5 @@ Public Function concatFolderName(folderName As String, fileName As String) As St
     concatFolderName = c.add(folderName).chopIf("/").chopIf("\").add("/").add(fileName).toString
     
 End Function
+
 
